@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuizActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question no. 12"
+        android:textSize="14sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/tvTitle"
+        android:layout_margin="20dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:29"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#FF0000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/tvTimer"
+        android:layout_margin="20dp"/>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#DE000000"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/tvQuestion"
+        android:layout_margin="20dp"/>
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:background="@drawable/option_background"
+        android:textColor="#99000000"
+        app:layout_constraintTop_toBottomOf="@id/tvQuestion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="8dp"
+        android:id="@+id/tvOption1"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:background="@drawable/option_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColor="#99000000"
+        app:layout_constraintTop_toBottomOf="@id/tvOption1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/tvOption2"
+        android:layout_margin="20dp"/>
+
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:textColor="#99000000"
+        android:background="@drawable/option_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvOption2"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/tvOption3"
+        android:layout_margin="20dp"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:background="@drawable/option_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="8dp"
+        android:textColor="#99000000"
+        app:layout_constraintTop_toBottomOf="@id/tvOption3"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/tvOption4"
+        android:layout_margin="20dp"
+        tools:ignore="InvalidId" />
+
+
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Check"
+        android:background="#00A143"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tvOption3"
+        android:layout_marginTop="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="20dp"
+        android:textAllCaps="false"
+        android:id="@+id/btCheck"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
