@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<!-- saved from url=(0086)https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_design_strategies.htm -->
+<html style="" class=" js no-touch csstransforms3d csstransitions"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Basic -->
+
+<title>Distributed DBMS Design Strategies</title>
+<meta name="description" content="Distributed DBMS Design Strategies - Learn Distributed DBMS in simple and easy steps starting from DBMS Concepts, Distributed Databases, Environments, Design Strategies, Distribution Transparency, Database Control, Relational Algebra for Query Optimization, Query Optimization in Centralized Systems, Distributed Systems, Transaction Processing Systems, Controlling Concurrency, Deadlock Handling, Replication Control, Failure and Commit, Database Recovery, Distributed Commit Protocols, Database Security and Cryptography, Security in Distributed Databases."> 
+<meta name="keywords" content="Distributed DBMS, Tutorial, Learning, Beginners, DBMS Concepts, Distributed Databases, Environments, Design Strategies, Distribution Transparency, Database Control, Relational Algebra for Query Optimization, Query Optimization in Centralized Systems, Distributed Systems, Transaction Processing Systems, Controlling Concurrency, Deadlock Handling, Replication Control, Failure and Commit, Database Recovery, Distributed Commit Protocols, Database Security and Cryptography, Security in Distributed Databases.">
+<!--<base href="https://www.tutorialspoint.com/">--><base href=".">
+<link rel="shortcut icon" href="https://www.tutorialspoint.com/favicon.ico" type="image/x-icon">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="fb:app_id" content="471319149685276">
+<meta property="og:site_name" content="www.tutorialspoint.com">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="./Distributed DBMS Design Strategies_files/script-min-v4.js.download"></script>
+<link rel="stylesheet" href="./Distributed DBMS Design Strategies_files/style-min.css">
+<script>
+function openNav() {	
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("right_obs").style.display = "block";
+}
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("right_obs").style.display = "none";
+}
+function close_obs_sidenav(){
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("right_obs").style.display = "none";
+}
+</script>
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+.btnsbmt{ background: #003333 !important;}
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #003333 url(/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #003333 !important;}
+.submenu-item{ border-bottom: 2px solid #003333 !important; border-top: 2px solid #003333 !important }
+.ace_scroller{overflow: auto!important;}
+a.demo{font-family: "Open Sans",Arial,sans-serif; background:#003333; color:#fff; font-size:13px; padding:3px 10px; border:1px solid #d6d6d6; position:absolute; right:5px; margin:-6px 17px 0px 0px;}
+a.demo:hover{opacity:.8}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+<style type="text/css">
+:root .bottomgooglead,
+:root .bottomadtag
+{ display: none !important; }
+:root *[ek6v3cn][hidden] { display: none !important; }</style></head>
+<body onload="prettyPrint()" style="">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img src="./Distributed DBMS Design Strategies_files/loading-cg.gif" alt="" width="70" height="70">
+   </div>
+</div>
+<div id="right_obs" class="display-none" onclick="close_obs_sidenav()"></div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="https://www.tutorialspoint.com/index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="./Distributed DBMS Design Strategies_files/logo.png">
+      </a>
+      </h1>			
+      <ul class="tp-inline-block pull-right" id="tp-head-icons">
+        <li>
+           <div class="tp-second-nav tp-display-none tp-pointer" onclick="openNav()">
+              <i class="fa fa-th-large fa-lg"></i>
+           </div>
+        </li>
+     </ul>
+     <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="https://www.tutorialspoint.com/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a target="_blank" href="https://www.tutorialspoint.com/programming_examples/"><i class="fa fa-cubes"></i> &nbsp;Examples</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="./Distributed DBMS Design Strategies_files/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="https://www.tutorialspoint.com/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" rel="nofollow" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" rel="nofollow" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" rel="nofollow" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" rel="nofollow" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" rel="nofollow" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+    </div>
+     <div class="sidenav" id="mySidenav">
+     <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="https://www.tutorialspoint.com/index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/questions/index.php"><i class="fa fa-send"></i> Q/A </a> </li>
+               <li class="dropdown"><a class="dropdown" href="https://www.tutorialspoint.com/tutorialslibrary.htm"><span class="tut-lib"> Library </span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/tutor_connect/index.php"><i class="fa-user"> </i> Tutors</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://www.tutorialspoint.com/codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="https://store.tutorialspoint.com/"><i class="fa-usd"></i> Store </a> </li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == &#39;Search your favorite tutorials...&#39;) {this.value = &#39;&#39;;}" onblur="if (this.value == &#39;&#39;) {this.value = &#39;Search your favorite tutorials...&#39;;}" autocomplete="off" style="">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+        </div>
+      </div>	
+     </div>	
+   	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+<img src="./Distributed DBMS Design Strategies_files/distributed-dbms-mini-logo.jpg" alt="Distributed DBMS Tutorial">
+</div>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Distributed DBMS Tutorial</li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/index.htm">DDBMS - Home</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_concepts.htm">DDBMS - DBMS Concepts</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_databases.htm">DDBMS - Distributed Databases</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Distributed Database Design</li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_database_environments.htm">Distributed Database Environments</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_design_strategies.htm" style="background-color: rgb(214, 214, 214);">DDBMS - Design Strategies</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_distribution_transparency.htm">DDBMS - Distribution Transparency</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_database_control.htm">DDBMS - Database Control</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Query Optimization</li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_relational_algebra_query_optimization.htm">Relational Algebra Query</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_query_optimization_centralized_systems.htm">Query Optimization Centralized</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_query_optimization_distributed_systems.htm">Query Optimization in Distributed</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Concurrency Control</li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_transaction_processing_systems.htm">Transaction Processing Systems</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_controlling_concurrency.htm">DDBMS - Controlling Concurrency</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_deadlock_handling.htm">DDBMS - Deadlock Handling</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Failure and Recovery</li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_replication_control.htm">DDBMS - Replication Control</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_failure_commit.htm">DDBMS - Failure &amp; Commit</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_database_recovery.htm">DDBMS - Database Recovery</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_commit_protocols.htm">Distributed Commit Protocols</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Distributed DBMS Security</li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_database_security_cryptography.htm">Database Security &amp; Cryptography</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_security_distributed_databases.htm">Security in Distributed Databases</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Distributed DBMS Resources</li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_quick_guide.htm">DDBMS - Quick Guide</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_useful_resources.htm">DDBMS - Useful Resources</a></li>
+<li><a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_discussion.htm">DDBMS - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="https://www.tutorialspoint.com/upsc_ias_exams.htm">UPSC IAS Exams Notes</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="https://www.tutorialspoint.com/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Distributed DBMS - Design Strategies</h1>
+<hr>
+<div style="padding-bottom:5px;padding-left:10px;text-align: center;">Advertisements</div>
+<div style="text-align: center;">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript" src="./Distributed DBMS Design Strategies_files/f.txt"> 
+</script>
+</div>
+<hr>
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_database_environments.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_distribution_transparency.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr>
+<p>In the last chapter, we had introduced different design alternatives. In this chapter, we will study the strategies that aid in adopting the designs. The strategies can be broadly divided into replication and fragmentation. However, in most cases, a combination of the two is used.</p>
+<h2>Data Replication</h2>
+<p>Data replication is the process of storing separate copies of the database at two or more sites. It is a popular fault tolerance technique of distributed databases.</p> 
+<h3>Advantages of Data Replication</h3>
+<ul class="list">
+<li><p><b>Reliability</b> − In case of failure of any site, the database system continues to work since a copy is available at another site(s).</p></li>
+<li><p><b>Reduction in Network Load</b> − Since local copies of data are available, query processing can be done with reduced network usage, particularly during prime hours. Data updating can be done at non-prime hours.</p></li>
+<li><p><b>Quicker Response</b> − Availability of local copies of data ensures quick query processing and consequently quick response time.</p></li>
+<li><p><b>Simpler Transactions</b> − Transactions require less number of joins of tables located at different sites and minimal coordination across the network. Thus, they become simpler in nature.</p></li>
+</ul>
+<h3>Disadvantages of Data Replication</h3>
+<ul class="list">
+<li><p><b>Increased Storage Requirements</b> − Maintaining multiple copies of data is associated with increased storage costs. The storage space required is in multiples of the storage required for a centralized system.</p></li>
+<li><p><b>Increased Cost and Complexity of Data Updating</b> − Each time a data item is updated, the update needs to be reflected in all the copies of the data at the different sites. This requires complex synchronization techniques and protocols.</p></li>
+<li><p><b>Undesirable Application – Database coupling</b> − If complex update mechanisms are not used, removing data inconsistency requires complex  co-ordination at application level. This results in undesirable application – database coupling.</p></li>
+</ul>
+<p>Some commonly used replication techniques are −</p>
+<ul class="list">
+<li>Snapshot replication</li>
+<li>Near-real-time replication</li>
+<li>Pull replication</li>
+</ul>
+<h2>Fragmentation</h2>
+<p>Fragmentation is the task of dividing a table into a set of smaller tables. The subsets of the table are called <b>fragments</b>. Fragmentation can be of three types: horizontal, vertical, and hybrid (combination of horizontal and vertical). Horizontal fragmentation can further be classified into two techniques: primary horizontal fragmentation and derived horizontal fragmentation.</p>
+<p>Fragmentation should be done in a way so that the original table can be reconstructed from the fragments. This is needed so that the original table can be reconstructed from the fragments whenever required. This requirement is called “reconstructiveness.”</p>
+<h3>Advantages of Fragmentation</h3>
+<ul class="list">
+<li><p>Since data is stored close to the site of usage, efficiency of the database system is increased.</p></li>
+<li><p>Local query optimization techniques are sufficient for most queries since data is locally available.</p></li>
+<li><p>Since irrelevant data is not available at the sites, security and privacy of the database system can be maintained.</p></li>
+</ul>
+<h3>Disadvantages of Fragmentation</h3>
+<ul class="list">
+<li><p>When data from different fragments are required, the access speeds may be very high.</p></li>
+<li><p>In case of recursive fragmentations, the job of reconstruction will need expensive techniques.</p></li>
+<li><p>Lack of back-up copies of data in different sites may render the database ineffective in case of failure of a site.</p></li>
+</ul>
+<h2>Vertical Fragmentation</h2>
+<p>In vertical fragmentation, the fields or columns of a table are grouped into fragments. In order to maintain reconstructiveness, each fragment should contain the primary key field(s) of the table. Vertical fragmentation can be used to enforce privacy of data.</p>
+<p>For example, let us consider that a University database keeps records of all registered students in a Student table having the following schema.</p>
+<p>STUDENT</p>
+<table class="table table-bordered">
+<tbody><tr>
+<td>Regd_No</td>
+<td>Name</td>
+<td>Course</td>
+<td>Address</td>
+<td>Semester</td>
+<td>Fees</td>
+<td>Marks</td>
+</tr>
+</tbody></table>
+<p>Now, the fees details are maintained in the accounts section. In this case, the designer will fragment the database as follows −</p>
+<pre class="prettyprint notranslate prettyprinted" style=""><span class="pln">CREATE TABLE STD_FEES AS 
+   SELECT </span><span class="typ">Regd_No</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Fees</span><span class="pln"> 
+   FROM STUDENT</span><span class="pun">;</span></pre>
+<h2>Horizontal Fragmentation</h2>
+<p>Horizontal fragmentation groups the tuples of a table in accordance to values of one or more fields. Horizontal fragmentation should also confirm to the rule of reconstructiveness. Each horizontal fragment must have all columns of the original base table.</p>
+<p>For example, in the student schema, if the details of all students of Computer Science Course needs to be maintained at the School of Computer Science, then the designer will horizontally fragment the database as follows −</p>
+<pre class="prettyprint notranslate prettyprinted" style=""><span class="pln">CREATE COMP_STD AS 
+   SELECT </span><span class="pun">*</span><span class="pln"> FROM STUDENT  
+   WHERE COURSE </span><span class="pun">=</span><span class="pln"> </span><span class="str">"Computer Science"</span><span class="pun">;</span></pre>
+<h2>Hybrid Fragmentation</h2>
+<p>In hybrid fragmentation, a combination of horizontal and vertical fragmentation techniques are used. This is the most flexible fragmentation technique since it generates fragments with minimal extraneous information. However, reconstruction of the original table is often an expensive task.</p>
+<p>Hybrid fragmentation can be done in two alternative ways −</p>
+<ul class="list">
+<li><p>At first, generate a set of horizontal fragments; then generate vertical fragments from one or more of the horizontal fragments.</p></li>
+<li><p>At first, generate a set of vertical fragments; then generate horizontal fragments from one or more of the vertical fragments.</p></li>
+</ul>
+<hr>
+<div class="pre-btn">
+<a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_database_environments.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="https://www.tutorialspoint.com/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_distribution_transparency.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr>
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead" ek6v3cn="" hidden="">
+<div class="bottomadtag" ek6v3cn="" hidden="">Advertisements</div>
+<script><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script src="./Distributed DBMS Design Strategies_files/f.txt">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open(&#39;https://www.facebook.com/sharer.php?u=&#39; + &#39;https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_design_strategies.htm&#39;,&#39;sharer&#39;,&#39;toolbar=0,status=0,width=626,height=456,top=&#39;+sTop+&#39;,left=&#39;+sLeft);return false;">
+<img src="./Distributed DBMS Design Strategies_files/facebookIcon.jpg" alt="img">
+</a>
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open(&#39;https://twitter.com/share?url=&#39; + &#39;https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_design_strategies.htm&#39;,&#39;sharer&#39;,&#39;toolbar=0,status=0,width=626,height=456,top=&#39;+sTop+&#39;,left=&#39;+sLeft);return false;">
+<img src="./Distributed DBMS Design Strategies_files/twitterIcon.jpg" alt="img">
+</a>
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open(&#39;https://www.linkedin.com/cws/share?url=&#39; + &#39;https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_design_strategies.htm&amp;title=&#39;+ document.title,&#39;sharer&#39;,&#39;toolbar=0,status=0,width=626,height=456,top=&#39;+sTop+&#39;,left=&#39;+sLeft);return false;">
+<img src="./Distributed DBMS Design Strategies_files/linkedinIcon.jpg" alt="img">
+</a>
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open(&#39;https://plus.google.com/share?url=https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_design_strategies.htm&#39;,&#39;sharer&#39;,&#39;toolbar=0,status=0,width=626,height=456,top=&#39;+sTop+&#39;,left=&#39;+sLeft);return false;">
+<img src="./Distributed DBMS Design Strategies_files/googlePlusIcon.jpg" alt="img">
+</a>
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open(&#39;https://www.stumbleupon.com/submit?url=https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_design_strategies.htm&amp;title=&#39;+ document.title,&#39;sharer&#39;,&#39;toolbar=0,status=0,width=626,height=456,top=&#39;+sTop+&#39;,left=&#39;+sLeft);return false;">
+<img src="./Distributed DBMS Design Strategies_files/StumbleUponIcon.jpg" alt="img">
+</a>
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open(&#39;https://reddit.com/submit?url=https://www.tutorialspoint.com/distributed_dbms/distributed_dbms_design_strategies.htm&amp;title=&#39;+ document.title,&#39;sharer&#39;,&#39;toolbar=0,status=0,width=626,height=656,top=&#39;+sTop+&#39;,left=&#39;+sLeft);return false;">
+<img src="./Distributed DBMS Design Strategies_files/reddit.jpg" alt="img">
+</a>
+</div>
+<div class="rightgooglead">
+<script><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script src="./Distributed DBMS Design Strategies_files/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script src="./Distributed DBMS Design Strategies_files/f.txt">
+</script>
+</div>
+<div class="rightgooglead">
+<script><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script src="./Distributed DBMS Design Strategies_files/f.txt">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="https://www.tutorialspoint.com/index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="./Distributed DBMS Design Strategies_files/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="https://www.tutorialspoint.com/about/faq.htm">FAQ's</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/about_privacy.htm#cookies">Cookies Policy</a></li>
+         <li><a href="https://www.tutorialspoint.com/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>© Copyright 2018. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == &#39;Enter email for newsletter...&#39;) {this.value = &#39;&#39;;}" onblur="if (this.value == &#39;&#39;) {this.value = &#39;Enter email for newsletter...&#39;;}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script src="./Distributed DBMS Design Strategies_files/custom-min.js.download"></script><a class="scroll-to-top" href="https://www.tutorialspoint.com/#" id="scrollToTop"><i class="icon icon-chevron-up icon-white"></i></a>
+<script src="./Distributed DBMS Design Strategies_files/urchin.js.download">
+</script>
+<script>
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+
+
+
+<div class="autocomplete-suggestions " style="top: 42px; left: 0px; width: 8px;"></div><span style="border-radius: 3px !important; text-indent: 20px !important; width: auto !important; padding: 0px 4px 0px 0px !important; text-align: center !important; font: bold 11px/20px &quot;Helvetica Neue&quot;, Helvetica, sans-serif !important; color: rgb(255, 255, 255) !important; background: url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMzBweCIgd2lkdGg9IjMwcHgiIHZpZXdCb3g9Ii0xIC0xIDMxIDMxIj48Zz48cGF0aCBkPSJNMjkuNDQ5LDE0LjY2MiBDMjkuNDQ5LDIyLjcyMiAyMi44NjgsMjkuMjU2IDE0Ljc1LDI5LjI1NiBDNi42MzIsMjkuMjU2IDAuMDUxLDIyLjcyMiAwLjA1MSwxNC42NjIgQzAuMDUxLDYuNjAxIDYuNjMyLDAuMDY3IDE0Ljc1LDAuMDY3IEMyMi44NjgsMC4wNjcgMjkuNDQ5LDYuNjAxIDI5LjQ0OSwxNC42NjIiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxIj48L3BhdGg+PHBhdGggZD0iTTE0LjczMywxLjY4NiBDNy41MTYsMS42ODYgMS42NjUsNy40OTUgMS42NjUsMTQuNjYyIEMxLjY2NSwyMC4xNTkgNS4xMDksMjQuODU0IDkuOTcsMjYuNzQ0IEM5Ljg1NiwyNS43MTggOS43NTMsMjQuMTQzIDEwLjAxNiwyMy4wMjIgQzEwLjI1MywyMi4wMSAxMS41NDgsMTYuNTcyIDExLjU0OCwxNi41NzIgQzExLjU0OCwxNi41NzIgMTEuMTU3LDE1Ljc5NSAxMS4xNTcsMTQuNjQ2IEMxMS4xNTcsMTIuODQyIDEyLjIxMSwxMS40OTUgMTMuNTIyLDExLjQ5NSBDMTQuNjM3LDExLjQ5NSAxNS4xNzUsMTIuMzI2IDE1LjE3NSwxMy4zMjMgQzE1LjE3NSwxNC40MzYgMTQuNDYyLDE2LjEgMTQuMDkzLDE3LjY0MyBDMTMuNzg1LDE4LjkzNSAxNC43NDUsMTkuOTg4IDE2LjAyOCwxOS45ODggQzE4LjM1MSwxOS45ODggMjAuMTM2LDE3LjU1NiAyMC4xMzYsMTQuMDQ2IEMyMC4xMzYsMTAuOTM5IDE3Ljg4OCw4Ljc2NyAxNC42NzgsOC43NjcgQzEwLjk1OSw4Ljc2NyA4Ljc3NywxMS41MzYgOC43NzcsMTQuMzk4IEM4Ljc3NywxNS41MTMgOS4yMSwxNi43MDkgOS43NDksMTcuMzU5IEM5Ljg1NiwxNy40ODggOS44NzIsMTcuNiA5Ljg0LDE3LjczMSBDOS43NDEsMTguMTQxIDkuNTIsMTkuMDIzIDkuNDc3LDE5LjIwMyBDOS40MiwxOS40NCA5LjI4OCwxOS40OTEgOS4wNCwxOS4zNzYgQzcuNDA4LDE4LjYyMiA2LjM4NywxNi4yNTIgNi4zODcsMTQuMzQ5IEM2LjM4NywxMC4yNTYgOS4zODMsNi40OTcgMTUuMDIyLDYuNDk3IEMxOS41NTUsNi40OTcgMjMuMDc4LDkuNzA1IDIzLjA3OCwxMy45OTEgQzIzLjA3OCwxOC40NjMgMjAuMjM5LDIyLjA2MiAxNi4yOTcsMjIuMDYyIEMxNC45NzMsMjIuMDYyIDEzLjcyOCwyMS4zNzkgMTMuMzAyLDIwLjU3MiBDMTMuMzAyLDIwLjU3MiAxMi42NDcsMjMuMDUgMTIuNDg4LDIzLjY1NyBDMTIuMTkzLDI0Ljc4NCAxMS4zOTYsMjYuMTk2IDEwLjg2MywyNy4wNTggQzEyLjA4NiwyNy40MzQgMTMuMzg2LDI3LjYzNyAxNC43MzMsMjcuNjM3IEMyMS45NSwyNy42MzcgMjcuODAxLDIxLjgyOCAyNy44MDEsMTQuNjYyIEMyNy44MDEsNy40OTUgMjEuOTUsMS42ODYgMTQuNzMzLDEuNjg2IiBmaWxsPSIjYmQwODFjIj48L3BhdGg+PC9nPjwvc3ZnPg==&quot;) 3px 50% / 14px 14px no-repeat rgb(189, 8, 28) !important; position: absolute !important; opacity: 1 !important; z-index: 8675309 !important; display: none; cursor: pointer !important; border: none !important; -webkit-font-smoothing: antialiased !important; top: 113px; left: 189px;">Save</span><span style="border-radius: 12px; width: 24px !important; height: 24px !important; background: url(&quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDI0IDI0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxkZWZzPjxtYXNrIGlkPSJtIj48cmVjdCBmaWxsPSIjZmZmIiB4PSIwIiB5PSIwIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHJ4PSI2IiByeT0iNiIvPjxyZWN0IGZpbGw9IiMwMDAiIHg9IjUiIHk9IjUiIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgcng9IjEiIHJ5PSIxIi8+PHJlY3QgZmlsbD0iIzAwMCIgeD0iMTAiIHk9IjAiIHdpZHRoPSI0IiBoZWlnaHQ9IjI0Ii8+PHJlY3QgZmlsbD0iIzAwMCIgeD0iMCIgeT0iMTAiIHdpZHRoPSIyNCIgaGVpZ2h0PSI0Ii8+PC9tYXNrPjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9IiNmZmYiIG1hc2s9InVybCgjbSkiLz48L3N2Zz4=&quot;) 50% 50% / 14px 14px no-repeat rgba(0, 0, 0, 0.4) !important; position: absolute !important; opacity: 1 !important; z-index: 8675309 !important; display: none; cursor: pointer !important; border: none !important; top: 111px; left: 402px;"></span></body></html>
