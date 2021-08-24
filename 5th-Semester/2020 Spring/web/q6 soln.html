@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Employee Details</title>
+</head>
+
+<body>
+    <form id="emp_from">
+        <table>
+            <tr>
+                <h5>Employee Details</h5>
+            </tr>
+            <tr>
+                <td>Name: </td>
+                <td> <input type="text" id="name" name="name"></td>
+            </tr>
+            <tr>
+                <td>Phone: </td>
+                <td> <input type="text" id="phone" name="phone"></td>
+            </tr>
+            <tr>
+                <td>Age: </td>
+                <td> <input type="number" id="age" name="age"></td>
+            </tr>
+            <tr>
+                <td>Gender: </td>
+                <td> <input type="radio" name="genderS" value="Male" checked="checked">Male</input>
+                    <input type="radio" name="genderS" value="Female">Female</input>
+                </td>
+            </tr>
+            <tr>
+                <td>Address: </td>
+                <td>
+                    <textarea id="address" name="address" rows="4" cols="21">
+                    </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td> <button type="button" onclick="add()">Add</button></td>
+                <td>
+                    <button type="button">Clear</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+<script>
+
+    function add() {
+        var name = document.getElementById("name").value;
+        var phone = document.getElementById("phone").value;
+        var age = document.getElementById("age").value;
+        var address = document.getElementById("address").value;
+
+        if (name == "") {
+            alert("Name must be filled out");
+            return false;
+        }
+        if (!/^[0-9]+$/.test(phone)) {
+            alert("Please only enter number only! (Allowed input:0-9)")
+            return false;
+        }
+        if (age == "") {
+            alert('Age Required!');
+            return false;
+        } else if (age < 18 || age > 60) {
+            alert("Invalid Age Range");
+            return false;
+        }
+        if (address == "") {
+            alert("Address must be filled out");
+            return false;
+        }
+        alert("All Inputs are valid");
+    }
+</script>
+
+</html>
