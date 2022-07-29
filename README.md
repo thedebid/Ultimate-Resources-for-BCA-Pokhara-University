@@ -1,4 +1,4 @@
-# Mission BCA (Pokhara University)
+# Ultimate Resources for BCA (Pokhara University)
 
 ## Resources for BCA Students of Pokhara University
 
